@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {wrapper} from '../components/store';
 import Navbar from '../components/Navbar'
 import { convertPrice } from '../helpers'
+import Typography from '@material-ui/core/Typography'
 
 const Home = ({ posts, currencyRates, baseCurrency }) => {
   return <div>
@@ -13,7 +14,7 @@ const Home = ({ posts, currencyRates, baseCurrency }) => {
       return (
         <Link key={id} href={`/product/${id}`}> 
         <div style={{ width: '400px' }}>
-          <p>{title}</p>
+          <Typography variant="h4">{title}</Typography>
           <p>{convertPrice({price, currencyRates, baseCurrency})}</p>
           <img src={imageUrl} alt={title} style={{ width: '400px', height: '300px' }}/>
         </div>
