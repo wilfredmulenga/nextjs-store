@@ -1,65 +1,42 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
+import {connect} from 'react-redux';
+import {wrapper} from '../components/store';
+import Navbar from '../components/Navbar'
+import { convertPrice } from '../helpers'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+const Home = ({ posts, currencyRates, baseCurrency }) => {
+  return <div>
+    <Navbar/>
+  {
+    posts && posts.map((item) => {
+      const { image: imageUrl, description, price, title, category, id } = item
+      return (
+        <Link key={id} href={`/product/${id}`}> 
+        <div style={{ width: '400px' }}>
+          <p>{title}</p>
+          <p>{convertPrice({price, currencyRates, baseCurrency})}</p>
+          <img src={imageUrl} alt={title} style={{ width: '400px', height: '300px' }}/>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+        </Link>
+      )
+    })
+  }
+</div>
 }
+
+export const getStaticProps = wrapper.getServerSideProps(
+    async ({ store }) => {
+ try {
+  const res = await fetch('https://fakestoreapi.com/products?limit=10')
+  const posts = await res.json()
+  const fetchCurrencyRates = await fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR,GBP,JPY')
+  const currencyRates  = await fetchCurrencyRates.json()
+  store.dispatch({type: 'FETCH_POSTS', payload: posts });
+  store.dispatch({ type: 'FETCH_CURRENCY_RATES', payload: currencyRates.rates })
+ } catch (error) {
+   console.log(error)
+ }
+    }
+);
+
+export default connect(state => state)(Home)
