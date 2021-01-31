@@ -14,7 +14,7 @@ const Home = ({ posts, currencyRates, baseCurrency }) => {
       return (
         <Link key={id} href={`/product/${id}`}> 
         <div style={{ width: '400px' }}>
-          <Typography variant="h4">{title}</Typography>
+          <Typography variant="h5">{title}</Typography>
           <p>{convertPrice({price, currencyRates, baseCurrency})}</p>
           <img src={imageUrl} alt={title} style={{ width: '400px', height: '300px' }}/>
         </div>
