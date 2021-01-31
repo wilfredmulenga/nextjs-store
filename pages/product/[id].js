@@ -1,18 +1,29 @@
 import { useRouter } from 'next/router'
 import {connect} from 'react-redux';
+import Image from 'next/image'
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import Navbar from '../../components/Navbar'
 import { convertPrice } from '../../helpers'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
+  root: { 
+    width: '100%', 
+    maxWidth: '1000px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   imageWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
     '& img': {
-      width: '100%',
-      height: '100%',
+      width: '400px',
+      height: '300px',
       objectFit: 'fill',
-      borderRadius: '4px',
-      boxShadow: '0px 18.025px 43.775px rgba(0, 0, 0, 0.25)'
+      backgroundColor: '#FFFFFF',
+      borderRadius: '5px',
+      padding: '10px',
+      marginBottom: '20px',
     }
   },
   textWrapper: {
@@ -21,25 +32,36 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
   },
   title: {
+    marginTop: 0,
+    marginBottom: '1rem',
     fontSize: '1.75rem',
     fontWeight: 'bold'
   },
   price: {
+    marginTop: 0,
+    marginBottom: 0,
+    marginRight: '2rem',
     fontSize: '1.5rem',
     fontWeight: 'bold'
   },
   description: {
     fontSize: '0.9rem'
+  },
+  buttonWrapper: {
+    display: 'flex',
+    paddingBottom: '10px'
+  },
+  main: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 }))
-
-
 const Product = ({ posts, currencyRates, baseCurrency }) => {
   const router = useRouter()
-  const { id } = router.query
   const classes = useStyles()
+  const { id: productId } = router.query
 
-  const selectedProduct =  posts && posts.find(product => product.id === Number(id))
+  const selectedProduct =  posts && posts.find(product => product.id === Number(productId))
 
   if(!selectedProduct) return(
     <div>
@@ -47,23 +69,22 @@ const Product = ({ posts, currencyRates, baseCurrency }) => {
       <p>Product not found.</p>
     </div>
   )
-      const { image: imageUrl, description, price, title, category} = selectedProduct
+
+  const { title, price, description, image: imageUrl } = selectedProduct
   return(
-    <div>
+    <div className={classes.root}>
       <Navbar />
-      <Grid container  style={{ width: '100%', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto', display: 'flex', justifyContent: 'center', paddingBottom: '2%' }}>
-        <Grid item sm={6} className={classes.imageWrapper}>
-      <img src={imageUrl} alt={title} style={{ width: '400px', height: '300px' }}/>
-        </Grid>
-     <Grid item sm={5} className={classes.textWrapper}>
-    <div>
-    <p className={classes.title}>{title}</p>
-     <p className={classes.description}>{description}</p>
-    </div>
-      <p className={classes.price}>{convertPrice({price, currencyRates, baseCurrency})}</p>
+      <Grid container justify='center' className={classes.main}>
+     <Grid className={classes.imageWrapper} sm={12}>
+     <Image src={imageUrl} alt={title} width='400' height='300'/>
      </Grid>
-    </Grid>
-    </div>
+     <Grid sm={5}>
+<p className={classes.title}>{title}</p>
+ <p className={classes.description}>{description}</p>
+<p className={classes.price}>{convertPrice({price, currencyRates, baseCurrency})}</p>
+      </Grid>
+      </Grid>
+      </div>
   )
 }
 

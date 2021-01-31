@@ -2,22 +2,16 @@ import Link from 'next/link'
 import {connect} from 'react-redux';
 import {wrapper} from '../components/store';
 import Navbar from '../components/Navbar'
-import { convertPrice } from '../helpers'
-import Typography from '@material-ui/core/Typography'
-
+import ProductItem from '../components/ProductItem'
 const Home = ({ posts, currencyRates, baseCurrency }) => {
   return <div>
     <Navbar/>
   {
-    posts && posts.map((item) => {
-      const { image: imageUrl, description, price, title, category, id } = item
+    posts && posts.map((product) => {
+      const { id } = product
       return (
-        <Link key={id} href={`/product/${id}`}> 
-        <div style={{ width: '400px' }}>
-          <Typography variant="h5">{title}</Typography>
-          <p>{convertPrice({price, currencyRates, baseCurrency})}</p>
-          <img src={imageUrl} alt={title} style={{ width: '400px', height: '300px' }}/>
-        </div>
+        <Link key={id} href={`/product/${id}`} style={{ backgrounColor: 'red' }}> 
+        <ProductItem productDetails={product} currencyRates={currencyRates} baseCurrency={baseCurrency} />
         </Link>
       )
     })
