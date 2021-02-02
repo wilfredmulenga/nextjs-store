@@ -1,11 +1,16 @@
 import {connect} from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Typography, Select, MenuItem } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Typography, Select, MenuItem } from '@material-ui/core'
+import {  METALLIC_SUNBURST } from '../src/colors'
 
 const useStyles = makeStyles(() => ({
+  root: {
+    marginBottom: '50px',
+    boxShadow: 'none'
+  },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    color: METALLIC_SUNBURST
   }
  }))
 
@@ -13,12 +18,9 @@ const Navbar = ({ dispatch, baseCurrency }) => {
 const classes = useStyles()
   
 return(
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root} color='transparent'>
   <Toolbar variant="dense">
-    {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton> */}
-    <Typography className={classes.title} variant="h6" color="inherit">
+    <Typography className={classes.title} variant="h6">
       Photos
     </Typography>
     <Select defaultValue={baseCurrency} name="currency" onChange={(event) => dispatch({ type: "UPDATE_BASE_CURRENCY", payload: event.target.value })}> 
@@ -30,18 +32,6 @@ return(
   </Toolbar>
 </AppBar>
   )
-
-  // return (
-  //   <div>
-  //     <p>Nav</p>
-  //     <select defaultValue={baseCurrency} name="currency" onChange={(event) => dispatch({ type: "UPDATE_BASE_CURRENCY", payload: event.target.value })}>
-  //       <option value="USD">USD</option>
-  //       <option value="JPY">JPY</option>
-  //       <option value="GBP">GBP</option>
-  //       <option value="EUR">EUR</option>
-  //     </select>
-  //   </div>
-  // )
 }
 
 export default connect(state => state)(Navbar)
