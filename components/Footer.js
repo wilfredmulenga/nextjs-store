@@ -1,12 +1,25 @@
-import { Typography } from '@material-ui/core';
+import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
+import { RICH_BLACK_FOGRA, METALLIC_SUNBURST } from '../src/colors'
 
 const useStyles = makeStyles(() => ({
   root: { 
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#07090F',
+    alignItems: 'center',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    backgroundColor: RICH_BLACK_FOGRA,
     height: '80px'
+     },
+     social: {
+       color: METALLIC_SUNBURST
+     },
+     brand: {
+       color: METALLIC_SUNBURST,
+       fontSize: '1.5rem',
+       fontWeight: 'bold',
+       cursor: 'pointer'
      }
  }))
 const Footer = () => {
@@ -14,10 +27,12 @@ const Footer = () => {
   return (
     <div className={classes.root}>
     <div>
-      <p>Musa's collection</p>
+      <Link href='/'>
+      <p className={classes.brand}>Yuki</p>
+      </Link>
     </div>
     <div>
-    Facebook | Twitter | Instagram
+   <p className={classes.social}>Facebook | Twitter | Instagram</p>
     </div>
   </div>
   )

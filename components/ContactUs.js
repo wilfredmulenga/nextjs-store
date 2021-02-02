@@ -1,31 +1,32 @@
-import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
+import { PLATINUM_GREY, SILVER_CHALICE } from '../src/colors'
 
 const useStyles = makeStyles(() => ({
   root: { 
     display: 'flex',
      justifyContent: 'center',
       textAlign: 'center',
-      backgroundColor: '#B8B1AE'
+      backgroundColor: SILVER_CHALICE
      },
      contactDetailsWrapper: {
        margin: '20px',
         width: '400px'
      },
      title: {
+      color: PLATINUM_GREY,
        marginTop: 0,
        marginBottom: '10px',
        fontSize: '1.75rem'
      },
      subtitle: {
        fontSize: '1rem',
-       color: '#EBEBEB'
+       color: PLATINUM_GREY
      },
      contact: {
       fontSize: '1.2rem',
       fontWeight: '400',
       margin: '10px',
-      color: '#EBEBEB'
+      color: PLATINUM_GREY
      }
  }))
 
