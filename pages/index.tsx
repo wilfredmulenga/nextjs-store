@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import ProductItem from "../components/ProductItem";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
-import { METALLIC_SUNBURST } from "../src/colors";
+import { METALLIC_SUNBURST, RICH_BLACK_FOGRA } from "../src/colors";
 import {
   Product,
   CurrencyRates,
@@ -59,11 +59,29 @@ const useStyles = makeStyles(() => ({
   "card-3": {
     gridArea: "card-3",
   },
+  subTitle: {
+    textAlign: "center",
+    fontSize: "1.75rem",
+    color: RICH_BLACK_FOGRA,
+    paddingBottom: "40px",
+  },
+  sectionWrapper: {
+    paddingBottom: "40px",
+  },
+  firstSection: {
+    paddingBottom: "20px",
+  },
 }));
 const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
   const classes = useStyles();
-  const mensClothing =
+  const mensClothingArr =
     posts && posts.filter((product) => product.category === "men clothing");
+
+  const jeweleryArr =
+    posts && posts.filter((product) => product.category === "jewelery");
+
+  const electronicsArr =
+    posts && posts.filter((product) => product.category === "electronics");
 
   return (
     <div className={classes.root}>
@@ -73,50 +91,71 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
         <p className={classes.title}>Extravagent</p>
         <p>Find your inner self</p>
       </div>
-      <div>
-        {posts &&
-          posts.map((product, index) => {
-            return (
-              <ProductItem
-                key={index}
-                product={product}
-                currencyRates={currencyRates}
-                baseCurrency={baseCurrency}
-                customStyles={classes.truncateDescription}
-                allowReverse
-                showButton
-                truncateDescription
-              />
-            );
-          })}
+      <div className={classes.firstSection}>
+        <ProductItem
+          product={mensClothingArr[0]}
+          currencyRates={currencyRates}
+          baseCurrency={baseCurrency}
+          customStyles={classes.truncateDescription}
+          allowReverse
+          showButton
+          truncateDescription
+        />
       </div>
-      {/* Men's clothing I want a three-part grid like this: https://furniture.superfast.shop/ */}
-      {/* TODO: need to use grid columns */}
-      {/* {mensClothing && (
-        <div className={classes.gridContainer}>
-          <div className={classes["card-1"]}>
-            <ProductCard
-              product={mensClothing[3]}
+      {/* Mens clothing */}
+      <div className={classes.sectionWrapper}>
+        <p className={classes.subTitle}>Mens clothing</p>
+        {mensClothingArr.map((product, index) => {
+          if (index === 0) return;
+          return (
+            <ProductItem
+              key={index}
+              product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
+              customStyles={classes.truncateDescription}
+              allowReverse
+              showButton
+              truncateDescription
             />
-          </div>
-          <div className={classes["card-2"]}>
-            <ProductCard
-              product={mensClothing[1]}
+          );
+        })}
+      </div>
+      {/* jewelry */}
+      <div className={classes.sectionWrapper}>
+        <p className={classes.subTitle}>Jewelry</p>
+        {jeweleryArr.map((product, index) => {
+          return (
+            <ProductItem
+              key={index}
+              product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
+              customStyles={classes.truncateDescription}
+              allowReverse
+              showButton
+              truncateDescription
             />
-          </div>
-          <div className={classes["card-3"]}>
-            <ProductCard
-              product={mensClothing[2]}
+          );
+        })}
+      </div>
+      <div className={classes.sectionWrapper}>
+        <p className={classes.subTitle}>Electronics</p>
+        {electronicsArr.map((product, index) => {
+          return (
+            <ProductItem
+              key={index}
+              product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
+              customStyles={classes.truncateDescription}
+              allowReverse
+              showButton
+              truncateDescription
             />
-          </div>
-        </div>
-      )} */}
+          );
+        })}
+      </div>
       <ContactUs />
       <Footer />
     </div>

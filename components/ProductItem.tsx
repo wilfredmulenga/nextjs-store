@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     marginRight: "auto",
     display: "flex",
     justifyContent: "space-around",
-    marginBottom: "120px",
+    marginBottom: "100px",
     paddingLeft: "10px",
     paddingRight: "10px",
   },
