@@ -1,5 +1,8 @@
 module.exports = {
   images: {
-    domains: ['fakestoreapi.com'],
+    domains: ["fakestoreapi.com"],
   },
-}
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+};
