@@ -31,7 +31,7 @@ export interface ConvertPrice {
 }
 
 export interface State {
-  posts: Array<Product>;
+  posts: Array<Product> | any[];
   baseCurrency: BaseCurrency;
   currencyRates: CurrencyRates;
 }

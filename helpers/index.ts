@@ -23,5 +23,5 @@ export const convertPrice: string = ({
       convertedPrice = "$" + price.toFixed(2);
       break;
   }
-  return convertedPrice;
+  return convertedPrice as const;
 };
