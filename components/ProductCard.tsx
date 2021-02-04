@@ -31,9 +31,7 @@ const ProductCard: React.FC<Props> = ({
       </div>
       <div>
         <p>{title}</p>
-        <p className={classes.price}>
-          {convertPrice({ price, currencyRates, baseCurrency })}
-        </p>
+        <p>{convertPrice({ price, currencyRates, baseCurrency })}</p>
       </div>
     </div>
   );

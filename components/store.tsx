@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   posts: [],
-  baseCurrency: "USD",
+  baseCurrency: "JPY",
   currencyRates: {},
 };
 

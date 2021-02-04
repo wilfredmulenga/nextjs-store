@@ -11,28 +11,22 @@ interface Props {
   product: Product;
   currencyRates: CurrencyRates;
   baseCurrency: BaseCurrency;
+  customStyles?: unknown;
+  allowReverse?: boolean;
+  showButton?: boolean;
+  truncateDescription?: boolean;
 }
 
 const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
-    maxWidth: "1000px",
     marginLeft: "auto",
     marginRight: "auto",
     display: "flex",
     justifyContent: "space-around",
-    marginBottom: "100px",
-  },
-  imageWrapper: {
-    "& img": {
-      width: "100%",
-      height: "100%",
-      objectFit: "fill",
-      backgroundColor: "#FFFFFF",
-      borderRadius: "5px",
-      padding: "10px",
-      boxShadow: "0px 18.025px 43.775px rgba(0, 0, 0, 0.25)",
-    },
+    marginBottom: "120px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
   },
   textWrapper: {
     display: "flex",
@@ -59,12 +53,24 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     paddingBottom: "10px",
   },
+  truncateDescription: {
+    fontSize: "0.9rem",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    display: "-webkit-box",
+    "-webkit-line-clamp": 5,
+    "-webkit-box-orient": "vertical",
+  },
 }));
 
 const ProductItem: React.FC<Props> = ({
   product,
   currencyRates,
   baseCurrency,
+  customStyles,
+  allowReverse = false,
+  showButton = false,
+  truncateDescription = false,
 }) => {
   const classes = useStyles();
   const { image: imageUrl, description, price, title, id } = product;
@@ -72,26 +78,36 @@ const ProductItem: React.FC<Props> = ({
     <Grid
       container
       spacing={2}
-      direction={id % 2 === 1 ? "row" : "row-reverse"}
-      className={classes.root}
+      direction={id % 2 === 0 && allowReverse ? "row-reverse" : "row"}
+      className={[classes.root, customStyles]}
     >
-      <Grid item sm={5} className={classes.imageWrapper}>
+      <Grid item lg={5} md={5} sm={5} xs={12} className={classes.imageWrapper}>
         <Image src={imageUrl} alt={title} width="400" height="300" priority />
       </Grid>
-      <Grid item sm={4} className={classes.textWrapper}>
+      <Grid item lg={4} md={4} sm={5} xs={12} className={classes.textWrapper}>
         <div>
           <p className={classes.title}>{title}</p>
-          <p className={classes.description}>{description}</p>
+          <p
+            className={[
+              truncateDescription
+                ? classes.truncateDescription
+                : classes.description,
+            ]}
+          >
+            {description}
+          </p>
         </div>
         <div className={classes.buttonWrapper}>
           <p className={classes.price}>
             {convertPrice({ price, currencyRates, baseCurrency })}
           </p>
-          <Link href={`/product/${id}`}>
-            <Button style={{ color: METALLIC_SUNBURST }} color="primary">
-              View more
-            </Button>
-          </Link>
+          {showButton && (
+            <Link href={`/product/${id}`}>
+              <Button style={{ color: METALLIC_SUNBURST }} color="primary">
+                View more
+              </Button>
+            </Link>
+          )}
         </div>
       </Grid>
     </Grid>

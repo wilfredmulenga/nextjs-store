@@ -44,8 +44,8 @@ const Navbar: React.FC<Props> = ({ dispatch, baseCurrency }) => {
             })
           }
         >
-          <MenuItem value="USD">USD $</MenuItem>
           <MenuItem value="JPY">JPY ¥</MenuItem>
+          <MenuItem value="USD">USD $</MenuItem>
           <MenuItem value="GBP">GBP £</MenuItem>
           <MenuItem value="EUR">EUR €</MenuItem>
         </Select>

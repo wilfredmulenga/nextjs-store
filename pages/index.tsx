@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import ContactUs from "../components/ContactUs";
 import Footer from "../components/Footer";
 import ProductItem from "../components/ProductItem";
-import ProductCard from "../components/ProductCard";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 import { METALLIC_SUNBURST } from "../src/colors";
@@ -35,11 +34,10 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "20px",
     marginBottom: "80px",
   },
   title: {
-    fontSize: "80px",
+    fontSize: "4rem",
     color: METALLIC_SUNBURST,
     margin: "10px",
   },
@@ -52,9 +50,15 @@ const useStyles = makeStyles(() => ({
       "card-1 card-1 card-3"
       ". . ."`,
   },
-  "card-1": { gridArea: "card-1" },
-  "card-2": { gridArea: "card-2" },
-  "card-3": { gridArea: "card-3" },
+  "card-1": {
+    gridArea: "card-1",
+  },
+  "card-2": {
+    gridArea: "card-2",
+  },
+  "card-3": {
+    gridArea: "card-3",
+  },
 }));
 const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
   const classes = useStyles();
@@ -78,13 +82,17 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
                 product={product}
                 currencyRates={currencyRates}
                 baseCurrency={baseCurrency}
+                customStyles={classes.truncateDescription}
+                allowReverse
+                showButton
+                truncateDescription
               />
             );
           })}
       </div>
       {/* Men's clothing I want a three-part grid like this: https://furniture.superfast.shop/ */}
       {/* TODO: need to use grid columns */}
-      {mensClothing && (
+      {/* {mensClothing && (
         <div className={classes.gridContainer}>
           <div className={classes["card-1"]}>
             <ProductCard
@@ -108,7 +116,7 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
             />
           </div>
         </div>
-      )}
+      )} */}
       <ContactUs />
       <Footer />
     </div>
