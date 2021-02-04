@@ -87,9 +87,9 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
     <div className={classes.root}>
       <Navbar />
       <div className={classes.titleWrapper}>
-        <Typography variant="h5">Unleash</Typography>
-        <p className={classes.title}>Extravagent</p>
-        <p>Find your inner self</p>
+        <Typography variant="h5"></Typography>
+        <p className={classes.title}>Extravagant</p>
+        <p>Find that inner-sparkle</p>
       </div>
       <div className={classes.firstSection}>
         <ProductItem
