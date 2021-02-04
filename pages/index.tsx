@@ -89,7 +89,7 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
       <div className={classes.titleWrapper}>
         <Typography variant="h5"></Typography>
         <p className={classes.title}>Extravagant</p>
-        <p>Find that inner-sparkle</p>
+        <p>Find that sparkle</p>
       </div>
       <div className={classes.firstSection}>
         <ProductItem
