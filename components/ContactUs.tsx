@@ -20,11 +20,11 @@ const useStyles = makeStyles(() => ({
     fontSize: "1.75rem",
   },
   subtitle: {
-    fontSize: "1rem",
+    fontSize: "1.2rem",
     color: PLATINUM_GREY,
   },
   contact: {
-    fontSize: "1.2rem",
+    fontSize: "1rem",
     fontWeight: "400",
     margin: "10px",
     color: PLATINUM_GREY,
@@ -38,8 +38,8 @@ const ContactUs: React.FC = () => {
       <div className={classes.contactDetailsWrapper}>
         <p className={classes.title}>Contact Us</p>
         <p className={classes.subtitle}>We would like to here from you </p>
-        <p className={classes.contact}>Email: contact@musas.collection</p>
-        <p className={classes.contact}>Phone: +260950003928</p>
+        <p className={classes.contact}>Email: contact@yukis.store</p>
+        <p className={classes.contact}>Phone: (+81)-80-0000-0000</p>
       </div>
     </div>
   );
