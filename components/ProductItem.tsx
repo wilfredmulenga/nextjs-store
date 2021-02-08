@@ -11,7 +11,7 @@ interface Props {
   product: Product;
   currencyRates: CurrencyRates;
   baseCurrency: BaseCurrency;
-  customStyles?: unknown;
+  customStyles?: string;
   allowReverse?: boolean;
   showButton?: boolean;
   truncateDescription?: boolean;
@@ -81,7 +81,7 @@ const ProductItem: React.FC<Props> = ({
       direction={id % 2 === 0 && allowReverse ? "row-reverse" : "row"}
       className={[classes.root, customStyles]}
     >
-      <Grid item lg={5} md={5} sm={5} xs={12} className={classes.imageWrapper}>
+      <Grid item lg={5} md={5} sm={5} xs={12}>
         <Image src={imageUrl} alt={title} width="400" height="300" priority />
       </Grid>
       <Grid item lg={4} md={4} sm={5} xs={12} className={classes.textWrapper}>

@@ -15,7 +15,7 @@ const initialState = {
 };
 
 // create your reducer
-const reducer = (state: State = initialState, action: ActionTypes) => {
+const reducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case HYDRATE:
       // TODO: look into the line below

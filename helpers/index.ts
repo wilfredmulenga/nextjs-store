@@ -1,10 +1,10 @@
 import { ConvertPrice } from "../src/types";
 
-export const convertPrice: string = ({
+export const convertPrice = ({
   price,
   currencyRates,
   baseCurrency,
-}: ConvertPrice) => {
+}: ConvertPrice): string => {
   let convertedPrice;
   switch (baseCurrency) {
     case "USD":
@@ -23,5 +23,5 @@ export const convertPrice: string = ({
       convertedPrice = "$" + price.toFixed(2);
       break;
   }
-  return convertedPrice as const;
+  return convertedPrice;
 };

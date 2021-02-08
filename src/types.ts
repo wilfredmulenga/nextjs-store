@@ -1,6 +1,7 @@
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_CURRENCY_RATES = "FETCH_CURRENCY_RATES";
 export const UPDATE_BASE_CURRENCY = "UPDATE_BASE_CURRENCY";
+export const HYDRATE = "__NEXT_REDUX_WRAPPER_HYDRATE__";
 
 export enum BaseCurrency {
   USD = "USD",
@@ -25,13 +26,13 @@ export interface CurrencyRates {
 }
 
 export interface ConvertPrice {
-  price: string;
+  price: number;
   currencyRates: CurrencyRates;
   baseCurrency: BaseCurrency;
 }
 
 export interface State {
-  posts: Array<Product> | any[];
+  posts: Array<Product>;
   baseCurrency: BaseCurrency;
   currencyRates: CurrencyRates;
 }
@@ -51,7 +52,13 @@ export interface updateBaseCurrencyAction {
   payload: BaseCurrency;
 }
 
+export interface hydate {
+  type: typeof HYDRATE;
+  payload: State;
+}
+
 export type ActionTypes =
   | fetchPostsAction
   | fetchCurrencyRatesAction
-  | updateBaseCurrencyAction;
+  | updateBaseCurrencyAction
+  | hydate;

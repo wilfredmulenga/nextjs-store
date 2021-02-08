@@ -96,7 +96,6 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
           product={mensClothingArr[0]}
           currencyRates={currencyRates}
           baseCurrency={baseCurrency}
-          customStyles={classes.truncateDescription}
           allowReverse
           showButton
           truncateDescription
@@ -113,7 +112,6 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
               product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
-              customStyles={classes.truncateDescription}
               allowReverse
               showButton
               truncateDescription
@@ -131,7 +129,6 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
               product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
-              customStyles={classes.truncateDescription}
               allowReverse
               showButton
               truncateDescription
@@ -148,7 +145,6 @@ const Home: React.FC<Props> = ({ posts, currencyRates, baseCurrency }) => {
               product={product}
               currencyRates={currencyRates}
               baseCurrency={baseCurrency}
-              customStyles={classes.truncateDescription}
               allowReverse
               showButton
               truncateDescription
