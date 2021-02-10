@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Dispatch } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Select, MenuItem } from "@material-ui/core";
-import { BaseCurrency, State } from "../src/types";
+import { BaseCurrency, State, updateBaseCurrencyAction } from "../src/types";
 import { METALLIC_SUNBURST } from "../src/colors";
 
 const useStyles = makeStyles(() => ({
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
-  dispatch: any;
+  dispatch: Dispatch<updateBaseCurrencyAction>;
   baseCurrency: BaseCurrency;
 }
 

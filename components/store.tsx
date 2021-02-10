@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { createWrapper, HYDRATE, MakeStore, Context } from "next-redux-wrapper";
+import { createWrapper, HYDRATE, MakeStore } from "next-redux-wrapper";
 import {
   State,
   FETCH_POSTS,
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action: ActionTypes) => {
 };
 
 // create a makeStore function
-const makeStore: MakeStore<State> = (context: Context) => createStore(reducer);
+const makeStore: MakeStore<State> = () => createStore(reducer);
 
 // export an assembled wrapper
-export const wrapper = createWrapper<State>(makeStore, { debug: true });
+export const wrapper = createWrapper<State>(makeStore, { debug: false });
