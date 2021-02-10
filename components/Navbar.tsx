@@ -37,12 +37,13 @@ const Navbar: React.FC<Props> = ({ dispatch, baseCurrency }) => {
         <Select
           defaultValue={baseCurrency}
           name="currency"
-          onChange={(event) =>
+          onChange={(event) => {
+            const { value }: { value: unknown } = event.target;
             dispatch({
               type: "UPDATE_BASE_CURRENCY",
-              payload: event.target.value,
-            })
-          }
+              payload: value,
+            });
+          }}
         >
           <MenuItem value="JPY">JPY ¥</MenuItem>
           <MenuItem value="USD">USD $</MenuItem>

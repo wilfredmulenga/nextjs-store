@@ -3,12 +3,7 @@ export const FETCH_CURRENCY_RATES = "FETCH_CURRENCY_RATES";
 export const UPDATE_BASE_CURRENCY = "UPDATE_BASE_CURRENCY";
 export const HYDRATE = "__NEXT_REDUX_WRAPPER_HYDRATE__";
 
-export enum BaseCurrency {
-  USD = "USD",
-  JPY = "JPY",
-  GBP = "GBP",
-  EUR = "EUR",
-}
+export type BaseCurrency = "JPY";
 
 export interface Product {
   id: number;
