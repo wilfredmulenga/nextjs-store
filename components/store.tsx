@@ -8,7 +8,7 @@ import {
   ActionTypes,
 } from "../src/types";
 
-const initialState = {
+const initialState: State = {
   posts: [],
   baseCurrency: "JPY",
   currencyRates: {},
