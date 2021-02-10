@@ -7,7 +7,7 @@ import ContactUs from "../../components/ContactUs";
 import Footer from "../../components/Footer";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { PURE_WHITE, METALLIC_SUNBURST } from "../../src/colors";
+import { METALLIC_SUNBURST } from "../../src/colors";
 import { Product, BaseCurrency, CurrencyRates, State } from "../../src/types";
 import ProductItem from "../../components/ProductItem";
 
@@ -17,12 +17,6 @@ const useStyles = makeStyles(() => ({
     maxWidth: "1000px",
     marginLeft: "auto",
     marginRight: "auto",
-  },
-  customStyles: {
-    backgroundColor: PURE_WHITE,
-    paddingTop: "60px",
-    paddingBottom: "60px",
-    marginBottom: "240px",
   },
   button: {
     color: METALLIC_SUNBURST,
@@ -69,7 +63,7 @@ const ProductPage: React.FC<Props> = ({
         product={selectedProduct}
         currencyRates={currencyRates}
         baseCurrency={baseCurrency}
-        customStyles={classes.customStyles}
+        customStyles
       />
       <ContactUs />
       <Footer />

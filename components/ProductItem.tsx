@@ -4,7 +4,7 @@ import Link from "next/link";
 import { convertPrice } from "../helpers";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button } from "@material-ui/core";
-import { METALLIC_SUNBURST } from "../src/colors";
+import { PURE_WHITE, METALLIC_SUNBURST } from "../src/colors";
 import { Product, CurrencyRates, BaseCurrency } from "../src/types";
 
 interface Props {
@@ -61,6 +61,19 @@ const useStyles = makeStyles(() => ({
     "-webkit-line-clamp": 5,
     "-webkit-box-orient": "vertical",
   },
+  customStyles: {
+    width: "100%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "flex",
+    justifyContent: "space-around",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    backgroundColor: PURE_WHITE,
+    paddingTop: "60px",
+    paddingBottom: "60px",
+    marginBottom: "240px",
+  },
 }));
 
 const ProductItem: React.FC<Props> = ({
@@ -79,7 +92,7 @@ const ProductItem: React.FC<Props> = ({
       container
       spacing={2}
       direction={id % 2 === 0 && allowReverse ? "row-reverse" : "row"}
-      className={[classes.root, customStyles]}
+      className={customStyles ? classes.customStyles : classes.root}
     >
       <Grid item lg={5} md={5} sm={5} xs={12}>
         <Image src={imageUrl} alt={title} width="400" height="300" priority />
