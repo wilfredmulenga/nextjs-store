@@ -11,7 +11,7 @@ interface Props {
   product: Product;
   currencyRates: CurrencyRates;
   baseCurrency: BaseCurrency;
-  customStyles?: string;
+  customStyles?: boolean;
   allowReverse?: boolean;
   showButton?: boolean;
   truncateDescription?: boolean;
@@ -80,7 +80,7 @@ const ProductItem: React.FC<Props> = ({
   product,
   currencyRates,
   baseCurrency,
-  customStyles,
+  customStyles = false,
   allowReverse = false,
   showButton = false,
   truncateDescription = false,
