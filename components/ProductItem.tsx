@@ -101,11 +101,11 @@ const ProductItem: React.FC<Props> = ({
         <div>
           <p className={classes.title}>{title}</p>
           <p
-            className={[
+            className={
               truncateDescription
                 ? classes.truncateDescription
-                : classes.description,
-            ]}
+                : classes.description
+            }
           >
             {description}
           </p>
