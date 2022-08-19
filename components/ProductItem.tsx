@@ -86,7 +86,26 @@ const ProductItem: React.FC<Props> = ({
   truncateDescription = false,
 }) => {
   const classes = useStyles();
+  // const product2 = [
+  //   {
+  //     id: 1,
+  //     title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+  //     price: 109.95,
+  //     description:
+  //       'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
+  //     category: "men's clothing",
+  //     imageUrl: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+  //     rating: {
+  //       rate: 3.9,
+  //       count: 120,
+  //     },
+  //   },
+  // ]
+
+  if (!product) return <></>;
+
   const { image: imageUrl, description, price, title, id } = product;
+
   return (
     <Grid
       container
@@ -95,7 +114,13 @@ const ProductItem: React.FC<Props> = ({
       className={customStyles ? classes.customStyles : classes.root}
     >
       <Grid item lg={5} md={5} sm={5} xs={12}>
-        <Image src={imageUrl} alt={title} width="400" height="300" priority />
+        <Image
+          src={imageUrl || ""}
+          alt={title}
+          width="400"
+          height="300"
+          priority
+        />
       </Grid>
       <Grid item lg={4} md={4} sm={5} xs={12} className={classes.textWrapper}>
         <div>
