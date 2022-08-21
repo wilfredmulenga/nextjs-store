@@ -146,6 +146,7 @@ const ProductItem: React.FC<Props> = ({
               </Button>
             </Link>
           )}
+          <Button>Add to cart</Button>
         </div>
       </Grid>
     </Grid>
