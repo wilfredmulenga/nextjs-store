@@ -6,7 +6,7 @@ import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { AppBar, Toolbar, Select, MenuItem } from "@material-ui/core";
-import { BaseCurrency, updateBaseCurrencyAction } from "../src/types";
+import { BaseCurrency } from "../src/types";
 import { METALLIC_SUNBURST } from "../src/colors";
 
 const useStyles = makeStyles(() => ({
@@ -24,11 +24,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
-  dispatch: Dispatch<updateBaseCurrencyAction>;
   baseCurrency: BaseCurrency;
 }
 
-const Navbar: React.FC<Props> = ({ dispatch, baseCurrency }) => {
+const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,12 +55,7 @@ const Navbar: React.FC<Props> = ({ dispatch, baseCurrency }) => {
           <Select
             defaultValue={baseCurrency}
             name="currency"
-            onChange={(event) =>
-              dispatch({
-                type: "UPDATE_BASE_CURRENCY",
-                payload: event.target.value,
-              })
-            }
+            onChange={() => {}}
           >
             <MenuItem value="JPY">JPY ¥</MenuItem>
             <MenuItem value="USD">USD $</MenuItem>
