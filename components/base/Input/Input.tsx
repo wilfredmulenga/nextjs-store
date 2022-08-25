@@ -10,6 +10,7 @@ type Props = {
   required?: boolean;
   type: "text" | "url" | "email" | "tel" | "password";
   value?: string;
+  styles: Record<string, unknown>;
 };
 
 const Input: React.FC<Props> = ({
@@ -22,9 +23,11 @@ const Input: React.FC<Props> = ({
   required = false,
   type,
   value,
+  styles,
 }) => (
   <input
     id={name}
+    className={styles}
     minLength={minLength}
     maxLength={maxLength}
     name={name}
