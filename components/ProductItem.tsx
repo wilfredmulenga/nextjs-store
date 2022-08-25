@@ -1,10 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { convertPrice } from "../helpers";
+import { useAuth } from "../contexts";
+import { useProducts } from "../contexts";
 import { makeStyles } from "@material-ui/core/styles";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Grid, Button } from "@material-ui/core";
-import { PURE_WHITE, METALLIC_SUNBURST } from "../src/colors";
+import { PURE_WHITE, METALLIC_SUNBURST, BACKGROUND_WHITE } from "../src/colors";
 import { Product, CurrencyRates, BaseCurrency } from "../src/types";
 
 interface Props {
@@ -14,7 +18,6 @@ interface Props {
   customStyles?: boolean;
   allowReverse?: boolean;
   truncateDescription?: boolean;
-  isAuthenticated: boolean;
 }
 
 const useStyles = makeStyles(() => ({
@@ -77,7 +80,10 @@ const useStyles = makeStyles(() => ({
     paddingTop: "60px",
     paddingBottom: "60px",
     marginBottom: "240px",
-    cursor: "pointer",
+  },
+  button: {
+    color: METALLIC_SUNBURST,
+    backgroundColor: BACKGROUND_WHITE,
   },
 }));
 
@@ -88,12 +94,19 @@ const ProductItem: React.FC<Props> = ({
   customStyles = false,
   allowReverse = false,
   truncateDescription = false,
-  isAuthenticated = false,
 }) => {
   const classes = useStyles();
-
+  const router = useRouter();
+  const { addOrder } = useProducts();
+  const { id: productId } = router.query;
+  const { isAuthenticated, user } = useAuth();
   if (!product) return <></>;
 
+  const addToCart = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const payload = { ...product, userId: user.uid };
+    await addOrder(payload);
+  };
   const { image: imageUrl, description, price, title, id } = product;
 
   return (
@@ -130,7 +143,12 @@ const ProductItem: React.FC<Props> = ({
             <p className={classes.price}>
               {convertPrice({ price, currencyRates, baseCurrency })}
             </p>
-            {isAuthenticated && <Button>Add to cart</Button>}
+            {productId && isAuthenticated && (
+              <Button className={classes.button} onClick={addToCart}>
+                <ShoppingCartIcon />
+                Add to cart
+              </Button>
+            )}
           </div>
         </Grid>
       </Grid>

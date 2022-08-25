@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
+import CartBadge from "./base/CartBadge/CartBadge";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { AppBar, Toolbar, Select, MenuItem } from "@material-ui/core";
 import { BaseCurrency } from "../src/types";
@@ -22,6 +23,10 @@ const useStyles = makeStyles(() => ({
     color: METALLIC_SUNBURST,
     cursor: "pointer",
     fontWeight: "bold",
+  },
+  cartBadge: {
+    paddingLeft: "22px",
+    paddingRight: "22px",
   },
 }));
 
@@ -70,6 +75,9 @@ const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
             <MenuItem value="GBP">GBP £</MenuItem>
             <MenuItem value="EUR">EUR €</MenuItem>
           </Select>
+          <div className={classes.cartBadge}>
+            <CartBadge />
+          </div>
           <div>
             <IconButton
               size="large"

@@ -37,12 +37,24 @@ const ProductsContextProvider: React.FC = ({ children }) => {
     }
   };
 
+  const addOrder = async (body) => {
+    try {
+      await fetcher.post({
+        url: "/order",
+        body,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
 
   const context = {
     products,
+    addOrder,
   };
 
   return (

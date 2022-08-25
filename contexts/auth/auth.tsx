@@ -44,7 +44,6 @@ const AuthContextProvider: React.FC = ({ children }) => {
         const loggedInUser = userCredential.user;
         setUser(loggedInUser);
         setIsAuthenticated(true);
-
         router.push("/");
       })
       .catch((error) => {

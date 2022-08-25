@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 import { METALLIC_SUNBURST, RICH_BLACK_FOGRA } from "../src/colors";
 import { useProducts } from "../contexts";
-import { useAuth } from "../contexts";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -61,7 +60,6 @@ const useStyles = makeStyles(() => ({
 const Home: React.FC<{}> = () => {
   const classes = useStyles();
   const { products } = useProducts();
-  const { isAuthenticated } = useAuth;
   const mensClothingArr =
     products &&
     products.filter((product) => product.category === "men's clothing");
@@ -103,7 +101,6 @@ const Home: React.FC<{}> = () => {
           baseCurrency={baseCurrency}
           allowReverse
           truncateDescription
-          isAuthenticated={isAuthenticated}
         />
       </div>
       {/* Mens clothing */}
@@ -119,7 +116,6 @@ const Home: React.FC<{}> = () => {
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
-              isAuthenticated={isAuthenticated}
             />
           );
         })}
@@ -136,7 +132,6 @@ const Home: React.FC<{}> = () => {
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
-              isAuthenticated={isAuthenticated}
             />
           );
         })}
@@ -152,7 +147,6 @@ const Home: React.FC<{}> = () => {
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
-              isAuthenticated={isAuthenticated}
             />
           );
         })}
