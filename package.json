@@ -16,17 +16,13 @@
     "@mui/material": "^5.10.1",
     "firebase": "^9.9.3",
     "next": "10.0.6",
-    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@types/material-ui": "^0.21.8",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.1",
-    "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "autoprefixer": "^10.4.8",

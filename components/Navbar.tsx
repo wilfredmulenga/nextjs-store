@@ -1,13 +1,12 @@
-import React, { Dispatch, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { AppBar, Toolbar, Select, MenuItem } from "@material-ui/core";
-import { BaseCurrency, State, updateBaseCurrencyAction } from "../src/types";
+import { BaseCurrency, updateBaseCurrencyAction } from "../src/types";
 import { METALLIC_SUNBURST } from "../src/colors";
 
 const useStyles = makeStyles(() => ({
@@ -107,4 +106,4 @@ const Navbar: React.FC<Props> = ({ dispatch, baseCurrency }) => {
   );
 };
 
-export default connect((state: State) => state)(Navbar);
+export default Navbar;

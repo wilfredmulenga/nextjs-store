@@ -1,6 +1,6 @@
 # Nextjs store
 
-This is a online-store project built with bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). Other tools used are: TypeScript, Redux and Material UI.
+This is a online-store project built with bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). Other tools used are: TypeScript and Material UI.
 
 [Fake Store API](https://fakestoreapi.com/) was used to fetch sample products and to fetch the exchange rates, [Exchange Rates API](https://exchangeratesapi.io/)
 

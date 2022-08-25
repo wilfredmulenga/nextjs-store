@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { wrapper } from "../components/store";
 import theme from "../src/theme";
 import { AuthContextProvider } from "../contexts";
+import { ProductsContextProvider } from "../contexts";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   React.useEffect(() => {
@@ -26,13 +26,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <AuthContextProvider>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </AuthContextProvider>
+      <ProductsContextProvider>
+        <AuthContextProvider>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </AuthContextProvider>
+      </ProductsContextProvider>
     </React.Fragment>
   );
 };
@@ -42,4 +44,4 @@ MyApp.propTypes = {
   pageProps: PropTypes.object.isRequired,
 };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

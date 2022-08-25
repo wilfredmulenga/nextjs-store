@@ -37,7 +37,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
 
   const login = async (credentials) => {
     const auth = getAuth();
-    console.log("function called");
+
     const { email, password } = credentials;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
