@@ -13,8 +13,8 @@ interface Props {
   baseCurrency: BaseCurrency;
   customStyles?: boolean;
   allowReverse?: boolean;
-  showButton?: boolean;
   truncateDescription?: boolean;
+  isAuthenticated: boolean;
 }
 
 const useStyles = makeStyles(() => ({
@@ -27,6 +27,10 @@ const useStyles = makeStyles(() => ({
     marginBottom: "100px",
     paddingLeft: "10px",
     paddingRight: "10px",
+    paddingTop: "20px",
+    paddingBottom: "20px",
+    cursor: "pointer",
+    backgroundColor: PURE_WHITE,
   },
   textWrapper: {
     display: "flex",
@@ -73,6 +77,7 @@ const useStyles = makeStyles(() => ({
     paddingTop: "60px",
     paddingBottom: "60px",
     marginBottom: "240px",
+    cursor: "pointer",
   },
 }));
 
@@ -82,74 +87,54 @@ const ProductItem: React.FC<Props> = ({
   baseCurrency,
   customStyles = false,
   allowReverse = false,
-  showButton = false,
   truncateDescription = false,
+  isAuthenticated = false,
 }) => {
   const classes = useStyles();
-  // const product2 = [
-  //   {
-  //     id: 1,
-  //     title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
-  //     price: 109.95,
-  //     description:
-  //       'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
-  //     category: "men's clothing",
-  //     imageUrl: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-  //     rating: {
-  //       rate: 3.9,
-  //       count: 120,
-  //     },
-  //   },
-  // ]
 
   if (!product) return <></>;
 
   const { image: imageUrl, description, price, title, id } = product;
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction={id % 2 === 0 && allowReverse ? "row-reverse" : "row"}
-      className={customStyles ? classes.customStyles : classes.root}
-    >
-      <Grid item lg={5} md={5} sm={5} xs={12}>
-        <Image
-          src={imageUrl || ""}
-          alt={title}
-          width="400"
-          height="300"
-          priority
-        />
+    <Link href={`/product/${id}`}>
+      <Grid
+        container
+        spacing={2}
+        direction={id % 2 === 0 && allowReverse ? "row-reverse" : "row"}
+        className={customStyles ? classes.customStyles : classes.root}
+      >
+        <Grid item lg={5} md={5} sm={5} xs={12}>
+          <Image
+            src={imageUrl || ""}
+            alt={title}
+            width="400"
+            height="300"
+            priority
+          />
+        </Grid>
+        <Grid item lg={4} md={4} sm={5} xs={12} className={classes.textWrapper}>
+          <div>
+            <p className={classes.title}>{title}</p>
+            <p
+              className={
+                truncateDescription
+                  ? classes.truncateDescription
+                  : classes.description
+              }
+            >
+              {description}
+            </p>
+          </div>
+          <div className={classes.buttonWrapper}>
+            <p className={classes.price}>
+              {convertPrice({ price, currencyRates, baseCurrency })}
+            </p>
+            {isAuthenticated && <Button>Add to cart</Button>}
+          </div>
+        </Grid>
       </Grid>
-      <Grid item lg={4} md={4} sm={5} xs={12} className={classes.textWrapper}>
-        <div>
-          <p className={classes.title}>{title}</p>
-          <p
-            className={
-              truncateDescription
-                ? classes.truncateDescription
-                : classes.description
-            }
-          >
-            {description}
-          </p>
-        </div>
-        <div className={classes.buttonWrapper}>
-          <p className={classes.price}>
-            {convertPrice({ price, currencyRates, baseCurrency })}
-          </p>
-          {showButton && (
-            <Link href={`/product/${id}`}>
-              <Button style={{ color: METALLIC_SUNBURST }} color="primary">
-                View more
-              </Button>
-            </Link>
-          )}
-          <Button>Add to cart</Button>
-        </div>
-      </Grid>
-    </Grid>
+    </Link>
   );
 };
 

@@ -55,8 +55,15 @@ const AuthContextProvider: React.FC = ({ children }) => {
     return isAuthenticated;
   };
 
+  const logout = () => {
+    setIsAuthenticated(false);
+    setUser(null);
+    router.push("/login");
+  };
+
   const context = {
     login,
+    logout,
     user,
     isAuthenticated,
   };

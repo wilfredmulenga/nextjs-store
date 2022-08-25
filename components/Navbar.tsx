@@ -37,15 +37,18 @@ const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogin = () => {
     if (isAuthenticated) {
-      // TODO: logout
+      logout();
     } else {
       router.push("/login");
     }
-    setAnchorEl(null);
   };
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -93,10 +96,9 @@ const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleLogin}>
                 {isAuthenticated ? "Logout" : "Login"}
               </MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
           </div>
         </Toolbar>
