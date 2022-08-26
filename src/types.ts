@@ -19,7 +19,7 @@ export interface Product {
   image: string;
 }
 
-export interface CurrencyRates {
+export interface rates {
   EUR: number;
   JPY: number;
   GBP: number;
@@ -27,14 +27,14 @@ export interface CurrencyRates {
 
 export interface ConvertPrice {
   price: number;
-  currencyRates: CurrencyRates;
+  rates: rates;
   baseCurrency: BaseCurrency;
 }
 
 export interface State {
   posts: Array<Product>;
   baseCurrency: BaseCurrency;
-  currencyRates: CurrencyRates;
+  rates: rates;
 }
 
 export interface fetchPostsAction {
@@ -42,9 +42,9 @@ export interface fetchPostsAction {
   payload: Array<Product>;
 }
 
-export interface fetchCurrencyRatesAction {
+export interface fetchratesAction {
   type: typeof FETCH_CURRENCY_RATES;
-  payload: CurrencyRates;
+  payload: rates;
 }
 
 export interface updateBaseCurrencyAction {
@@ -59,6 +59,6 @@ export interface hydate {
 
 export type ActionTypes =
   | fetchPostsAction
-  | fetchCurrencyRatesAction
+  | fetchratesAction
   | updateBaseCurrencyAction
   | hydate;

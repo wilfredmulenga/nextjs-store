@@ -59,7 +59,7 @@ const useStyles = makeStyles(() => ({
 }));
 const Home: React.FC<{}> = () => {
   const classes = useStyles();
-  const { products } = useProducts();
+  const { products, baseCurrency, rates } = useProducts();
   const mensClothingArr =
     products &&
     products.filter((product) => product.category === "men's clothing");
@@ -70,21 +70,6 @@ const Home: React.FC<{}> = () => {
   const electronicsArr =
     products &&
     products.filter((product) => product.category === "electronics");
-
-  // TODO: move to the API
-  const currencyRates = {
-    rates: {
-      AUD: 1.566015,
-      CAD: 1.560132,
-      CHF: 1.154727,
-      CNY: 7.827874,
-      GBP: 0.882047,
-      JPY: 132.360679,
-      USD: 1.23396,
-    },
-  };
-
-  const baseCurrency = "USD";
 
   return (
     <div className={classes.root}>
@@ -97,7 +82,7 @@ const Home: React.FC<{}> = () => {
       <div className={classes.firstSection}>
         <ProductItem
           product={mensClothingArr[0]}
-          currencyRates={currencyRates}
+          rates={rates}
           baseCurrency={baseCurrency}
           allowReverse
           truncateDescription
@@ -112,7 +97,7 @@ const Home: React.FC<{}> = () => {
             <ProductItem
               key={index}
               product={product}
-              currencyRates={currencyRates}
+              rates={rates}
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
@@ -128,7 +113,7 @@ const Home: React.FC<{}> = () => {
             <ProductItem
               key={index}
               product={product}
-              currencyRates={currencyRates}
+              rates={rates}
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
@@ -143,7 +128,7 @@ const Home: React.FC<{}> = () => {
             <ProductItem
               key={index}
               product={product}
-              currencyRates={currencyRates}
+              rates={rates}
               baseCurrency={baseCurrency}
               allowReverse
               truncateDescription
@@ -156,36 +141,5 @@ const Home: React.FC<{}> = () => {
     </div>
   );
 };
-
-// TODO: add products to server side props?
-
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   async ({ store }) => {
-//     try {
-//       const res = await fetch("https://fakestoreapi.com/products?limit=10");
-//       // const fetchCurrencyRates = await fetch(
-//       //   "https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR,GBP,JPY"
-//       // );
-//       const currencyRates = {
-//         rates: {
-//           AUD: 1.566015,
-//           CAD: 1.560132,
-//           CHF: 1.154727,
-//           CNY: 7.827874,
-//           GBP: 0.882047,
-//           JPY: 132.360679,
-//           USD: 1.23396,
-//         },
-//       };
-//       store.dispatch({ type: FETCH_POSTS, payload: posts });
-//       store.dispatch({
-//         type: FETCH_CURRENCY_RATES,
-//         payload: currencyRates.rates,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
 
 export default Home;

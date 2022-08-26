@@ -4,11 +4,11 @@ import { convertPrice } from "../helpers";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { PURE_WHITE, METALLIC_SUNBURST, BACKGROUND_WHITE } from "../src/colors";
-import { Product, CurrencyRates, BaseCurrency } from "../src/types";
+import { Product, rates, BaseCurrency } from "../src/types";
 
 interface Props {
   product: Product;
-  currencyRates: CurrencyRates;
+  rates: rates;
   baseCurrency: BaseCurrency;
   customStyles?: boolean;
   allowReverse?: boolean;
@@ -82,7 +82,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartItem: React.FC<Props> = ({ order, currencyRates, baseCurrency }) => {
+const CartItem: React.FC<Props> = ({ order, rates, baseCurrency }) => {
   const classes = useStyles();
 
   if (!order) return <></>;
@@ -106,7 +106,7 @@ const CartItem: React.FC<Props> = ({ order, currencyRates, baseCurrency }) => {
         </div>
         <div className={classes.buttonWrapper}>
           <p className={classes.price}>
-            {convertPrice({ price, currencyRates, baseCurrency })}
+            {convertPrice({ price, rates, baseCurrency })}
           </p>
         </div>
       </Grid>

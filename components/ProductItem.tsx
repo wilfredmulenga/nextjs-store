@@ -9,11 +9,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Grid, Button } from "@material-ui/core";
 import { PURE_WHITE, METALLIC_SUNBURST, BACKGROUND_WHITE } from "../src/colors";
-import { Product, CurrencyRates, BaseCurrency } from "../src/types";
+import { Product, rates, BaseCurrency } from "../src/types";
 
 interface Props {
   product: Product;
-  currencyRates: CurrencyRates;
+  rates: rates;
   baseCurrency: BaseCurrency;
   customStyles?: boolean;
   allowReverse?: boolean;
@@ -89,7 +89,7 @@ const useStyles = makeStyles(() => ({
 
 const ProductItem: React.FC<Props> = ({
   product,
-  currencyRates,
+  rates,
   baseCurrency,
   customStyles = false,
   allowReverse = false,
@@ -142,7 +142,7 @@ const ProductItem: React.FC<Props> = ({
           </div>
           <div className={classes.buttonWrapper}>
             <p className={classes.price}>
-              {convertPrice({ price, currencyRates, baseCurrency })}
+              {convertPrice({ price, rates, baseCurrency })}
             </p>
             {productId && isAuthenticated && (
               <Button className={classes.button} onClick={addToCart}>

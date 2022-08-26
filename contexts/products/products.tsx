@@ -33,6 +33,17 @@ const initialValue = {
   products: [],
   orders: [],
   orderCount: 0,
+  rates: {
+    AUD: 1.566015,
+    CAD: 1.560132,
+    CHF: 1.154727,
+    CNY: 7.827874,
+    GBP: 0.882047,
+    JPY: 132.360679,
+    USD: 1.23396,
+    EUR: 1.01,
+  },
+  baseCurrency: "USD",
 };
 
 const ProductsContext = createContext(initialValue);
@@ -46,6 +57,7 @@ const ProductsContextProvider: React.FC = ({ children }) => {
   const [products, setProducts] = useState<Product[]>(initialValue.products);
   const [orders, setOrders] = useState<Order[]>(initialValue.orders);
   const [orderCount, setOrderCount] = useState(initialValue.orderCount);
+  const [baseCurrency, setBaseCurrency] = useState(initialValue.baseCurrency);
 
   const getProducts = async () => {
     try {
@@ -91,6 +103,8 @@ const ProductsContextProvider: React.FC = ({ children }) => {
     }
   };
 
+  const changeBaseCurrency = (currency: string) => setBaseCurrency(currency);
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -107,6 +121,9 @@ const ProductsContextProvider: React.FC = ({ children }) => {
     orders,
     orderCount,
     getOrders,
+    changeBaseCurrency,
+    baseCurrency,
+    rates: initialValue.rates,
   };
 
   return (

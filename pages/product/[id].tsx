@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { METALLIC_SUNBURST } from "../../src/colors";
-import { BaseCurrency, CurrencyRates } from "../../src/types";
+import { BaseCurrency, rates } from "../../src/types";
 import ProductItem from "../../components/ProductItem";
 import { useProducts } from "../../contexts";
 
@@ -27,10 +27,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
-  currencyRates: CurrencyRates;
+  rates: rates;
   baseCurrency: BaseCurrency;
 }
-const ProductPage: React.FC<Props> = ({ currencyRates, baseCurrency }) => {
+const ProductPage: React.FC<Props> = ({ rates, baseCurrency }) => {
   const router = useRouter();
   const classes = useStyles();
   const { products } = useProducts();
@@ -57,7 +57,7 @@ const ProductPage: React.FC<Props> = ({ currencyRates, baseCurrency }) => {
       <Navbar />
       <ProductItem
         product={selectedProduct}
-        currencyRates={currencyRates}
+        rates={rates}
         baseCurrency={baseCurrency}
         customStyles
       />

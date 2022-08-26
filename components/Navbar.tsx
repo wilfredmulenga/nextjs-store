@@ -35,11 +35,11 @@ interface Props {
   baseCurrency: BaseCurrency;
 }
 
-const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
+const Navbar: React.FC<Props> = () => {
   const classes = useStyles();
   const router = useRouter();
   const { isAuthenticated, logout } = useAuth();
-  const { orderCount } = useProducts();
+  const { orderCount, baseCurrency, changeBaseCurrency } = useProducts();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -67,9 +67,9 @@ const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
             <p className={classes.brand}>Yuki</p>
           </Link>
           <Select
-            defaultValue={baseCurrency}
+            defaultValue={"USD"}
             name="currency"
-            onChange={() => {}}
+            onChange={(event) => changeBaseCurrency(event.target.value)}
           >
             <MenuItem value="JPY">JPY ¥</MenuItem>
             <MenuItem value="USD">USD $</MenuItem>

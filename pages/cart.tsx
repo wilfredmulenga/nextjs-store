@@ -11,21 +11,7 @@ import { METALLIC_SUNBURST } from "../src/colors";
 import { makeStyles } from "@material-ui/styles";
 
 const Cart: NextPage = () => {
-  const { orders } = useProducts();
-
-  const currencyRates = {
-    rates: {
-      AUD: 1.566015,
-      CAD: 1.560132,
-      CHF: 1.154727,
-      CNY: 7.827874,
-      GBP: 0.882047,
-      JPY: 132.360679,
-      USD: 1.23396,
-    },
-  };
-
-  const baseCurrency = "USD";
+  const { orders, baseCurrency, rates } = useProducts();
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -60,7 +46,7 @@ const Cart: NextPage = () => {
             <CartItem
               key={key}
               order={order}
-              currencyRates={currencyRates}
+              rates={rates}
               baseCurrency={baseCurrency}
             />
           );

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "../../firebase";
 import { useRouter } from "next/router";
+import { useFetch } from "../../hooks";
 
 const initialValue = {
   login: async () => {},
@@ -29,15 +30,16 @@ const AuthContext = createContext<Auth>(initialValue);
 const useAuth = () => useContext(AuthContext);
 
 const AuthContextProvider: React.FC = ({ children }) => {
+  const router = useRouter();
+  const fetcher = useFetch();
+  const auth = getAuth();
+
   const [isAuthenticated, setIsAuthenticated] = useState(
     initialValue.isAuthenticated
   );
   const [user, setUser] = useState(initialValue.user);
-  const router = useRouter();
 
   const login = async (credentials) => {
-    const auth = getAuth();
-
     const { email, password } = credentials;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -48,10 +50,24 @@ const AuthContextProvider: React.FC = ({ children }) => {
       })
       .catch((error) => {
         console.log(error);
-        //TODO: can display error to user
       });
 
     return isAuthenticated;
+  };
+
+  const signup = async (credentials) => {
+    try {
+      const res = await fetcher.post({
+        url: "/user",
+        credentials,
+      });
+
+      setUser(res);
+      setIsAuthenticated(true);
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const logout = () => {
@@ -65,6 +81,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
     logout,
     user,
     isAuthenticated,
+    signup,
   };
 
   return (

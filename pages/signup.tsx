@@ -7,21 +7,23 @@ import { makeStyles } from "@material-ui/styles";
 import Container from "@mui/material/Container";
 import { PURE_WHITE, METALLIC_SUNBURST, RICH_BLACK_FOGRA } from "../src/colors";
 
-const Login: NextPage = () => {
+const Signup: NextPage = () => {
   type InitialState = {
     email: string;
     password: string;
+    confirmPassword: string;
   };
 
   const initialState: InitialState = {
     email: "",
     password: "",
+    confirmPassword: "",
     errorMessage: "",
   };
 
   const [values, setValues] = useState(initialState);
 
-  const { login } = useAuth();
+  const { signup } = useAuth();
 
   const onChange = (
     event: React.ChangeEvent<
@@ -39,8 +41,8 @@ const Login: NextPage = () => {
   const onSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
 
-    const { email, password } = values;
-    if (!email || !password) {
+    const { email, password, confirmPassword } = values;
+    if (!email || !password || !confirmPassword) {
       setValues((state) => ({
         ...state,
         errorMessage: "Please input all fields",
@@ -48,8 +50,16 @@ const Login: NextPage = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setValues((state) => ({
+        ...state,
+        errorMessage: "passwords do not match",
+      }));
+      return;
+    }
+
     try {
-      await login({ email, password });
+      await signup({ email, password });
     } catch (error) {
       setValues((state) => ({
         ...state,
@@ -66,9 +76,10 @@ const Login: NextPage = () => {
     },
     box: {
       backgroundColor: METALLIC_SUNBURST,
-      height: "40vh",
+      height: "50vh",
       paddingLeft: "10%",
       paddingRight: "10%",
+      paddingTop: "1%",
       textAlign: "center",
     },
     input: {
@@ -97,10 +108,10 @@ const Login: NextPage = () => {
       color: RICH_BLACK_FOGRA,
     },
     register: {
-      paddingTop: "5%",
       textAlign: "center",
       color: PURE_WHITE,
       cursor: "pointer",
+      fontSize: "16px",
     },
   }));
 
@@ -110,7 +121,7 @@ const Login: NextPage = () => {
     <div className={classes.root}>
       <Container maxWidth="sm">
         <div className={classes.box}>
-          <h1 className={classes.title}>Login</h1>
+          <h1 className={classes.title}>Signup</h1>
           <form className={classes.form} onSubmit={onSubmit}>
             <div className={classes.inputWrapper}>
               <Input
@@ -131,16 +142,23 @@ const Login: NextPage = () => {
                 type="password"
                 value={values.password}
               />
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                styles={classes.input}
+                placeholder="confirm password"
+                onChange={onChange}
+                type="password"
+                value={values.confirmPassword}
+              />
             </div>
             <button className={classes.button} type="submit">
               Submit
             </button>
-            {values.errorMessage && (
-              <p className={classes.errorMessage}>{values.errorMessage}</p>
-            )}
+            <p className={classes.errorMessage}>{values.errorMessage}</p>
             <div className={classes.register}>
-              <Link href="/signup">
-                <p>Signup</p>
+              <Link href="/login">
+                <p>login</p>
               </Link>
             </div>
           </form>
@@ -150,4 +168,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default Signup;

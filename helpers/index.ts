@@ -2,7 +2,7 @@ import { ConvertPrice } from "../src/types";
 
 export const convertPrice = ({
   price,
-  currencyRates,
+  rates,
   baseCurrency,
 }: ConvertPrice): string => {
   let convertedPrice;
@@ -11,13 +11,13 @@ export const convertPrice = ({
       convertedPrice = "$" + price.toFixed(2);
       break;
     case "JPY":
-      convertedPrice = "¥" + (price * currencyRates.JPY).toFixed(2);
+      convertedPrice = "¥" + (price * rates.JPY).toFixed(2);
       break;
     case "GBP":
-      convertedPrice = "£" + (price * currencyRates.GBP).toFixed(2);
+      convertedPrice = "£" + (price * rates.GBP).toFixed(2);
       break;
     case "EUR":
-      convertedPrice = "€" + (price * currencyRates.EUR).toFixed(2);
+      convertedPrice = "€" + (price * rates.EUR).toFixed(2);
       break;
     default:
       convertedPrice = "$" + price.toFixed(2);
