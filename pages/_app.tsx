@@ -26,15 +26,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ProductsContextProvider>
-        <AuthContextProvider>
+      <AuthContextProvider>
+        <ProductsContextProvider>
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Component {...pageProps} />
           </ThemeProvider>
-        </AuthContextProvider>
-      </ProductsContextProvider>
+        </ProductsContextProvider>
+      </AuthContextProvider>
     </React.Fragment>
   );
 };

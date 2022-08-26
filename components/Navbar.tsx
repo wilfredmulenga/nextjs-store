@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts";
+import { useProducts } from "../contexts";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -37,12 +38,12 @@ interface Props {
 const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
   const classes = useStyles();
   const router = useRouter();
+  const { isAuthenticated, logout } = useAuth();
+  const { orderCount } = useProducts();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const { isAuthenticated, logout } = useAuth();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -75,8 +76,13 @@ const Navbar: React.FC<Props> = ({ baseCurrency = "USD" }) => {
             <MenuItem value="GBP">GBP £</MenuItem>
             <MenuItem value="EUR">EUR €</MenuItem>
           </Select>
-          <div className={classes.cartBadge}>
-            <CartBadge />
+          <div
+            className={classes.cartBadge}
+            onClick={() => {
+              router.push("/cart");
+            }}
+          >
+            <CartBadge count={orderCount} />
           </div>
           <div>
             <IconButton

@@ -44,7 +44,7 @@ const useFetch = (): Fetchers => {
 
       if (!rawBody) {
         const headerParam = getHeaderParam({ auth, token });
-        requestOptions.headers = getAuthHeader(headerParam);
+        // requestOptions.headers = getAuthHeader(headerParam);
       }
 
       if (body) {

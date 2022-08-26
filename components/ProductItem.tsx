@@ -107,6 +107,7 @@ const ProductItem: React.FC<Props> = ({
     const payload = { ...product, userId: user.uid };
     await addOrder(payload);
   };
+
   const { image: imageUrl, description, price, title, id } = product;
 
   return (
